@@ -37,7 +37,7 @@ for (var i = 0; i < blocks.length; i++) {
 
   // beautify
   var newBlock = document.createElement('pre');
-  var beautiful = js_beautify(block.innerHTML, { indent_size: 2 });
+  var beautiful = js_beautify(block.innerText, { indent_size: 2 });
   newBlock.innerHTML = beautiful
   block.parentNode.replaceChild(newBlock, block);
 
