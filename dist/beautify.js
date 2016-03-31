@@ -677,7 +677,7 @@
                 allow_wrap_or_preserved_newline(current_token.wanted_newline);
                 // do nothing on (( and )( and ][ and ]( and .(
             } else if (!(last_type === 'TK_RESERVED' && current_token.text === '(') && last_type !== 'TK_WORD' && last_type !== 'TK_OPERATOR') {
-                output.space_before_token = true;
+                output.space_before_token = false;
             } else if ((last_type === 'TK_RESERVED' && (flags.last_word === 'function' || flags.last_word === 'typeof')) ||
                 (flags.last_text === '*' && last_last_text === 'function')) {
                 // function() vs function ()
@@ -767,7 +767,7 @@
             var next_token = get_token(1)
             var second_token = get_token(2)
             if (second_token && (
-                    (in_array(second_token.text, [':', ',']) && in_array(next_token.type, ['TK_STRING', 'TK_WORD', 'TK_RESERVED']))
+                    (in_array(second_token.text, ['=>', ',']) && in_array(next_token.type, ['TK_STRING', 'TK_WORD', 'TK_RESERVED']))
                     || (in_array(next_token.text, ['get', 'set']) && in_array(second_token.type, ['TK_WORD', 'TK_RESERVED']))
                 )) {
                 // We don't support TypeScript,but we didn't break it for a very long time.
@@ -1205,8 +1205,8 @@
                 allow_wrap_or_preserved_newline();
             }
 
-            var space_before = true;
-            var space_after = true;
+            var space_before = false;
+            var space_after = false;
 
             if (in_array(current_token.text, ['--', '++', '!', '~']) || (in_array(current_token.text, ['-', '+']) && (in_array(last_type, ['TK_START_BLOCK', 'TK_START_EXPR', 'TK_EQUALS', 'TK_OPERATOR']) || in_array(flags.last_text, Tokenizer.line_starters) || flags.last_text === ','))) {
                 // unary operators (and binary +/- pretending to be unary) special cases
@@ -1239,7 +1239,7 @@
                     // a * +b
                     // a - -b
                     if (in_array(current_token.text, ['+', '-']) && in_array(flags.last_text, ['--', '++'])) {
-                        space_after = true;
+                        space_after = false;
                     }
                 }
 

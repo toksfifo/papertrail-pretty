@@ -41,7 +41,7 @@ for (var i = 0; i < blocks.length; i++) {
   newBlock.innerHTML = beautiful
   block.parentNode.replaceChild(newBlock, block);
 
-  newBlock.className += ' brush: ruby';
-  // newBlock.className += ' prettyprint';
+  // newBlock.className += ' brush: ruby';
+  newBlock.className += ' prettyprint';
 
 }
