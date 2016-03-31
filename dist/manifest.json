@@ -5,6 +5,7 @@
   "description": "Chrome extension to make Papertrail logs more readable",
   "content_scripts": [{
     "matches": ["<all_urls>"],
-    "js": ["app.js"]
+    "js": ["highlight.js", "syntaxhighlighter.js", "code-prettify.js", "beautify.js", "app.js"],
+    "css": ["highlight.css", "theme.css"]
   }]
 }
