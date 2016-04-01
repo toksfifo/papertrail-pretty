@@ -86,6 +86,11 @@ function expandMessage(messageParent) {
     }
   }
 
+  // Message is already expanded
+  if (!message) {
+    return;
+  }
+
   // Replace message
   var newMessage = document.createElement('pre');
   var beautifulMessage = js_beautify(message.innerText, beautifyOptions);
