@@ -1,0 +1,17 @@
+.expand {
+  width: 14px;
+  height: 14px;
+  line-height: 13px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  color: rgba(255, 255, 255, 1.0);
+  background: rgba(3, 73, 143, 1.0);
+  border: 0;
+  font-size: 16px;
+  font-family: Helvetica;
+  font-weight: 300;
+  border-radius: 2px;
+  left: 0;
+}
