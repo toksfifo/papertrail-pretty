@@ -16,10 +16,11 @@
   left: 0;
 }
 
-.black {
-  // background-color: black;
+.expand:hover {
+  background: rgba(19, 92, 168, 1.0);
+  color: rgba(255, 255, 255, 1.0);
 }
 
-* {
-  // font-family: Helvetica
+.hljs {
+  padding: 6px 16px;
 }
