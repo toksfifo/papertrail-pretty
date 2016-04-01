@@ -41,8 +41,11 @@ console.log("loaded extension");
 //   newBlock.innerHTML = beautiful
 //   block.parentNode.replaceChild(newBlock, block);
 
+//   newBlock.className += ' ruby';
+//   hljs.highlightBlock(newBlock);
+
 //   // newBlock.className += ' brush: ruby';
-//   newBlock.className += ' prettyprint';
+//   // newBlock.className += ' prettyprint';
 // }
 
 
@@ -83,9 +86,18 @@ function expandMessage(messageParent) {
     }
   }
 
+  // Message is already expanded
+  if (!message) {
+    return;
+  }
+
   // Replace message
   var newMessage = document.createElement('pre');
   var beautifulMessage = js_beautify(message.innerText, beautifyOptions);
   newMessage.innerHTML = beautifulMessage;
   messageParent.replaceChild(newMessage, message);
+
+  // Highlight
+  newMessage.className += ' ruby';
+  hljs.highlightBlock(newMessage);
 }
