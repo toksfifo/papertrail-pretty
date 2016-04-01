@@ -50,6 +50,29 @@ console.log("loaded extension");
 
 
 var messages = document.querySelectorAll('.event.colorized');
+var eventList = document.getElementById('event_list');
+
+if (eventList) {
+  var observer = new MutationObserver(function(mutations) {
+    for (var i = 0; i < mutations.length; i++) {
+      var mutation = mutations[i]
+      if (mutation.target) {
+        for (var j = 0; j < mutation.target.children.length; j++) {
+          var expandButton = createExpandButton();
+          var listItem = mutation.target.children[j]
+          listItem.insertBefore(expandButton, listItem.firstChild);
+        }
+      } else {
+        console.log('-----------------------')
+        console.log(mutation.addedNodes)
+      }
+    }
+  })
+
+  var config = { attributes: true, childList: true, characterData: true }
+
+  observer.observe(eventList, config)
+}
 
 for (var i = 0; i < messages.length; i++) {
   var message = messages[i];
