@@ -5,7 +5,7 @@ console.log("loaded extension");
 
 
 
-// highlighter.js
+// // highlighter.js
 // hljs.configure({
 //   useBr: true
 // });
@@ -41,11 +41,9 @@ console.log("loaded extension");
 //   newBlock.innerHTML = beautiful
 //   block.parentNode.replaceChild(newBlock, block);
 
-//   newBlock.className += ' brush: ruby';
-//   // newBlock.className += ' prettyprint';
-
+//   // newBlock.className += ' brush: ruby';
+//   newBlock.className += ' prettyprint';
 // }
-
 
 
 

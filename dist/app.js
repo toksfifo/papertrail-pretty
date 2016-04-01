@@ -5,7 +5,7 @@ console.log("loaded extension");
 // var body = document.querySelector('body').innerHTML;
 // console.log(body);
 
-// highlighter.js
+// // highlighter.js
 // hljs.configure({
 //   useBr: true
 // });
@@ -41,9 +41,8 @@ console.log("loaded extension");
 //   newBlock.innerHTML = beautiful
 //   block.parentNode.replaceChild(newBlock, block);
 
-//   newBlock.className += ' brush: ruby';
-//   // newBlock.className += ' prettyprint';
-
+//   // newBlock.className += ' brush: ruby';
+//   newBlock.className += ' prettyprint';
 // }
 
 var messages = document.querySelectorAll('.event.colorized');
