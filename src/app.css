@@ -1,4 +1,4 @@
-.expand {
+.pp-button {
   width: 14px;
   height: 14px;
   line-height: 13px;
@@ -6,19 +6,43 @@
   margin: 0;
   padding: 0;
   position: absolute;
-  color: rgba(255, 255, 255, 1.0);
-  background: rgba(3, 73, 143, 1.0);
   border: 0;
   font-size: 16px;
   font-family: Helvetica;
   font-weight: 300;
   border-radius: 2px;
   left: 0;
+  display: none;
 }
 
-.expand:hover {
-  background: rgba(19, 92, 168, 1.0);
+.pp-hover .pp-button {
+  display: initial;
+}
+
+.pp-button.pp-expand {
   color: rgba(255, 255, 255, 1.0);
+  background: rgba(3, 73, 143, 1.0);
+}
+
+.pp-button.pp-contract {
+  color: rgba(255, 255, 255, 1.0);
+  background: rgba(3, 73, 143, 1.0);
+}
+
+.pp-button.pp-expand:hover {
+  color: rgba(255, 255, 255, 1.0);
+  background: rgba(19, 92, 168, 1.0);
+}
+
+.pp-button.pp-contract:hover {
+  color: rgba(255, 255, 255, 1.0);
+  background: rgba(19, 92, 168, 1.0);
+}
+
+.pp-hidden,
+.pp-hover .pp-hidden,
+.pp-hover .pp-button.pp-hidden {
+  display: none;
 }
 
 .hljs {
