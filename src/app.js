@@ -11,6 +11,7 @@ const eventListId = 'event_list';
 const listItemSelector = '.event.colorized';
 const mutationConfig = { childList: true };
 const listItemNodeName = 'LI';
+const listItemHoverClass = 'pp-hover';
 
 // ListItem
 class ListItem {
@@ -22,6 +23,17 @@ class ListItem {
     this.contractButton = null;
     this.addButtons();
     this.setDefaultButtonState();
+    this.addHoverListener();
+  }
+
+  // Only show the expand/contract button on hover of ListItem
+  addHoverListener() {
+    this.node.addEventListener('mouseover', () => {
+      this.node.classList.add(listItemHoverClass);
+    });
+    this.node.addEventListener('mouseout', () => {
+      this.node.classList.remove(listItemHoverClass);
+    });
   }
 
   setDefaultButtonState() {

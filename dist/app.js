@@ -21,6 +21,7 @@ var eventListId = 'event_list';
 var listItemSelector = '.event.colorized';
 var mutationConfig = { childList: true };
 var listItemNodeName = 'LI';
+var listItemHoverClass = 'pp-hover';
 
 // ListItem
 
@@ -35,9 +36,25 @@ var ListItem = function () {
     this.contractButton = null;
     this.addButtons();
     this.setDefaultButtonState();
+    this.addHoverListener();
   }
 
+  // Only show the expand/contract button on hover of ListItem
+
+
   _createClass(ListItem, [{
+    key: 'addHoverListener',
+    value: function addHoverListener() {
+      var _this = this;
+
+      this.node.addEventListener('mouseover', function () {
+        _this.node.classList.add(listItemHoverClass);
+      });
+      this.node.addEventListener('mouseout', function () {
+        _this.node.classList.remove(listItemHoverClass);
+      });
+    }
+  }, {
     key: 'setDefaultButtonState',
     value: function setDefaultButtonState() {
       this.expandButton.show();
@@ -95,10 +112,15 @@ var ListItem = function () {
     key: 'getPrettyMessage',
     value: function getPrettyMessage() {
       var prettyMessage = document.createElement('pre');
+
+      // Beautify
       var beautifulMessage = js_beautify(this.message.innerText, beautifyConfig);
       prettyMessage.innerHTML = beautifulMessage;
+
+      // Highlight
       prettyMessage.classList.add(language);
       hljs.highlightBlock(prettyMessage);
+
       this.prettyMessage = prettyMessage;
       this.node.insertBefore(this.prettyMessage, this.message);
       return prettyMessage;
@@ -212,6 +234,9 @@ var View = function () {
           }
         }
       });
+
+      // Watch the list of events for changes and create a new ListItem for new
+      // events.
       observer.observe(this.eventList, mutationConfig);
     }
   }]);

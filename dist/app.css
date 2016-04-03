@@ -12,6 +12,11 @@
   font-weight: 300;
   border-radius: 2px;
   left: 0;
+  display: none;
+}
+
+.pp-hover .pp-button {
+  display: initial;
 }
 
 .pp-button.pp-expand {
@@ -20,24 +25,26 @@
 }
 
 .pp-button.pp-contract {
-  color: rgba(3, 73, 143, 1.0);
-  background: rgba(255, 255, 255, 1.0);
+  color: rgba(255, 255, 255, 1.0);
+  background: rgba(3, 73, 143, 1.0);
 }
 
 .pp-button.pp-expand:hover {
-  background: rgba(19, 92, 168, 1.0);
   color: rgba(255, 255, 255, 1.0);
+  background: rgba(19, 92, 168, 1.0);
 }
 
 .pp-button.pp-contract:hover {
-  color: rgba(3, 73, 143, 1.0);
-  background: rgba(230, 230, 230, 1.0);
+  color: rgba(255, 255, 255, 1.0);
+  background: rgba(19, 92, 168, 1.0);
+}
+
+.pp-hidden,
+.pp-hover .pp-hidden,
+.pp-hover .pp-button.pp-hidden {
+  display: none;
 }
 
 .hljs {
   padding: 6px 16px;
-}
-
-.pp-hidden {
-  display: none;
 }
