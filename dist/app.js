@@ -17,6 +17,12 @@ var messageClass = 'message';
 var hiddenClass = 'pp-hidden';
 var beautifyConfig = { indent_size: 2 };
 var language = 'ruby';
+var eventListId = 'event_list';
+var listItemSelector = '.event.colorized';
+var mutationConfig = { childList: true };
+var listItemNodeName = 'LI';
+
+// ListItem
 
 var ListItem = function () {
   function ListItem(node) {
@@ -85,9 +91,6 @@ var ListItem = function () {
       }
       return null;
     }
-
-    // comment
-
   }, {
     key: 'getPrettyMessage',
     value: function getPrettyMessage() {
@@ -104,6 +107,9 @@ var ListItem = function () {
 
   return ListItem;
 }();
+
+// Button
+
 
 var Button = function () {
   function Button(text, cssClass, onClick) {
@@ -131,6 +137,9 @@ var Button = function () {
   return Button;
 }();
 
+// ExpandButton
+
+
 var ExpandButton = function (_Button) {
   _inherits(ExpandButton, _Button);
 
@@ -142,6 +151,9 @@ var ExpandButton = function (_Button) {
 
   return ExpandButton;
 }(Button);
+
+// ContractButton
+
 
 var ContractButton = function (_Button2) {
   _inherits(ContractButton, _Button2);
@@ -155,39 +167,56 @@ var ContractButton = function (_Button2) {
   return ContractButton;
 }(Button);
 
-var listItems = document.querySelectorAll('.event.colorized');
-var eventList = document.getElementById('event_list');
+// View
 
-// if (eventList) {
-//   var observer = new MutationObserver((mutations) => {
-//     for (var i = 0; i < mutations.length; i++) {
-//       var mutation = mutations[i];
-//       var newNodes = mutation.addedNodes;
-//       if (newNodes && newNodes.length > 0) {
-//         for (var j = 0; j < newNodes.length; j++) {
-//           var listItem = newNodes[j]
-//           if (listItem.nodeName !== 'LI') {
-//             continue;
-//           }
-//           var expandButton = createExpandButton();
-//           // if doesn't already have button
-//           listItem.insertBefore(expandButton, listItem.firstChild);
-//         }
-//       }
-//     }
-//   });
 
-//   var config = { childList: true }
+var View = function () {
+  function View() {
+    _classCallCheck(this, View);
 
-//   observer.observe(eventList, config)
-// }
+    this.eventList = document.getElementById(eventListId);
+    this.listItems = document.querySelectorAll(listItemSelector);
+  }
 
-// for (var i = 0; i < listItems.length; i++) {
-//   var listItem = listItems[i];
-//   var expandButton = createExpandButton();
-//   listItem.insertBefore(expandButton, listItem.firstChild);
-// }
+  _createClass(View, [{
+    key: 'init',
+    value: function init() {
+      if (this.eventList) {
+        this.initListItems();
+        this.watchListItems();
+      }
+    }
+  }, {
+    key: 'initListItems',
+    value: function initListItems() {
+      for (var i = 0; i < this.listItems.length; i++) {
+        var node = this.listItems[i];
+        new ListItem(node);
+      }
+    }
+  }, {
+    key: 'watchListItems',
+    value: function watchListItems() {
+      var observer = new MutationObserver(function (mutations) {
+        for (var i = 0; i < mutations.length; i++) {
+          var mutation = mutations[i];
+          var newNodes = mutation.addedNodes;
+          if (newNodes && newNodes.length > 0) {
+            for (var j = 0; j < newNodes.length; j++) {
+              var node = newNodes[j];
+              if (node.nodeName !== listItemNodeName) {
+                continue;
+              }
+              new ListItem(node);
+            }
+          }
+        }
+      });
+      observer.observe(this.eventList, mutationConfig);
+    }
+  }]);
 
-for (var i = 0; i < listItems.length; i++) {
-  var listItem = new ListItem(listItems[i]);
-}
+  return View;
+}();
+
+new View().init();

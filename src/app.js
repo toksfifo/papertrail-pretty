@@ -7,8 +7,12 @@ const messageClass = 'message';
 const hiddenClass = 'pp-hidden';
 const beautifyConfig = { indent_size: 2 };
 const language = 'ruby';
+const eventListId = 'event_list';
+const listItemSelector = '.event.colorized';
+const mutationConfig = { childList: true };
+const listItemNodeName = 'LI';
 
-
+// ListItem
 class ListItem {
   constructor(node) {
     this.node = node;
@@ -68,7 +72,6 @@ class ListItem {
     return null;
   }
 
-  // comment
   getPrettyMessage() {
     var prettyMessage = document.createElement('pre');
     var beautifulMessage = js_beautify(this.message.innerText, beautifyConfig);
@@ -82,6 +85,7 @@ class ListItem {
 
 }
 
+// Button
 class Button {
   constructor(text, cssClass, onClick) {
     this.node = document.createElement('button');
@@ -100,55 +104,60 @@ class Button {
   }
 }
 
+// ExpandButton
 class ExpandButton extends Button {
   constructor(onClick) {
     super(buttonExpandText, buttonExpandClass, onClick);
   }
 }
 
+// ContractButton
 class ContractButton extends Button {
   constructor(onClick) {
     super(buttonContractText, buttonContractClass, onClick);
   }
 }
 
+// View
+class View {
+  constructor() {
+    this.eventList = document.getElementById(eventListId);
+    this.listItems = document.querySelectorAll(listItemSelector);
+  }
 
+  init() {
+    if (this.eventList) {
+      this.initListItems();
+      this.watchListItems();
+    }
+  }
 
-var listItems = document.querySelectorAll('.event.colorized');
-var eventList = document.getElementById('event_list');
+  initListItems() {
+    for (var i = 0; i < this.listItems.length; i++) {
+      var node = this.listItems[i];
+      new ListItem(node);
+    }
+  }
 
+  watchListItems() {
+    var observer = new MutationObserver((mutations) => {
+      for (var i = 0; i < mutations.length; i++) {
+        var mutation = mutations[i];
+        var newNodes = mutation.addedNodes;
+        if (newNodes && newNodes.length > 0) {
+          for (var j = 0; j < newNodes.length; j++) {
+            var node = newNodes[j];
+            if (node.nodeName !== listItemNodeName) {
+              continue;
+            }
+            new ListItem(node);
+          }
+        }
+      }
+    });
+    observer.observe(this.eventList, mutationConfig);
+  }
 
-
-// if (eventList) {
-//   var observer = new MutationObserver((mutations) => {
-//     for (var i = 0; i < mutations.length; i++) {
-//       var mutation = mutations[i];
-//       var newNodes = mutation.addedNodes;
-//       if (newNodes && newNodes.length > 0) {
-//         for (var j = 0; j < newNodes.length; j++) {
-//           var listItem = newNodes[j]
-//           if (listItem.nodeName !== 'LI') {
-//             continue;
-//           }
-//           var expandButton = createExpandButton();
-//           // if doesn't already have button
-//           listItem.insertBefore(expandButton, listItem.firstChild);
-//         }
-//       }
-//     }
-//   });
-
-//   var config = { childList: true }
-
-//   observer.observe(eventList, config)
-// }
-
-// for (var i = 0; i < listItems.length; i++) {
-//   var listItem = listItems[i];
-//   var expandButton = createExpandButton();
-//   listItem.insertBefore(expandButton, listItem.firstChild);
-// }
-
-for (var i = 0; i < listItems.length; i++) {
-  var listItem = new ListItem(listItems[i]);
 }
+
+new View().init();
