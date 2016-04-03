@@ -2,23 +2,25 @@ var messages = document.querySelectorAll('.event.colorized');
 var eventList = document.getElementById('event_list');
 
 if (eventList) {
-  var observer = new MutationObserver(function(mutations) {
+  var observer = new MutationObserver((mutations) => {
     for (var i = 0; i < mutations.length; i++) {
-      var mutation = mutations[i]
-      if (mutation.target) {
-        for (var j = 0; j < mutation.target.children.length; j++) {
+      var mutation = mutations[i];
+      var newNodes = mutation.addedNodes;
+      if (newNodes && newNodes.length > 0) {
+        for (var j = 0; j < newNodes.length; j++) {
+          var listItem = newNodes[j]
+          if (listItem.nodeName !== 'LI') {
+            continue;
+          }
           var expandButton = createExpandButton();
-          var listItem = mutation.target.children[j]
+          // if doesn't already have button
           listItem.insertBefore(expandButton, listItem.firstChild);
         }
-      } else {
-        console.log('-----------------------')
-        console.log(mutation.addedNodes)
       }
     }
-  })
+  });
 
-  var config = { attributes: true, childList: true, characterData: true }
+  var config = { childList: true }
 
   observer.observe(eventList, config)
 }
