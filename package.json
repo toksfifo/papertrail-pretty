@@ -23,7 +23,5 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2"
   },
-  "dependencies": {
-    "js-beautify": "^1.6.2"
-  }
+  "dependencies": {}
 }
