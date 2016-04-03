@@ -1,4 +1,4 @@
-.expand {
+.pp-button {
   width: 14px;
   height: 14px;
   line-height: 13px;
@@ -6,8 +6,6 @@
   margin: 0;
   padding: 0;
   position: absolute;
-  color: rgba(255, 255, 255, 1.0);
-  background: rgba(3, 73, 143, 1.0);
   border: 0;
   font-size: 16px;
   font-family: Helvetica;
@@ -16,11 +14,30 @@
   left: 0;
 }
 
-.expand:hover {
+.pp-button.pp-expand {
+  color: rgba(255, 255, 255, 1.0);
+  background: rgba(3, 73, 143, 1.0);
+}
+
+.pp-button.pp-contract {
+  color: rgba(3, 73, 143, 1.0);
+  background: rgba(255, 255, 255, 1.0);
+}
+
+.pp-button.pp-expand:hover {
   background: rgba(19, 92, 168, 1.0);
   color: rgba(255, 255, 255, 1.0);
 }
 
+.pp-button.pp-contract:hover {
+  color: rgba(3, 73, 143, 1.0);
+  background: rgba(230, 230, 230, 1.0);
+}
+
 .hljs {
   padding: 6px 16px;
+}
+
+.pp-hidden {
+  display: none;
 }
