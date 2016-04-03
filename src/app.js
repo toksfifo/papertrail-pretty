@@ -74,10 +74,15 @@ class ListItem {
 
   getPrettyMessage() {
     var prettyMessage = document.createElement('pre');
+
+    // Beautify
     var beautifulMessage = js_beautify(this.message.innerText, beautifyConfig);
     prettyMessage.innerHTML = beautifulMessage;
+
+    // Highlight
     prettyMessage.classList.add(language);
     hljs.highlightBlock(prettyMessage);
+
     this.prettyMessage = prettyMessage;
     this.node.insertBefore(this.prettyMessage, this.message);
     return prettyMessage;
@@ -155,6 +160,9 @@ class View {
         }
       }
     });
+
+    // Watch the list of events for changes and create a new ListItem for new
+    // events.
     observer.observe(this.eventList, mutationConfig);
   }
 
