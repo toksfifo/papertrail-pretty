@@ -1,3 +1,4 @@
+// Constants
 const buttonClass = 'pp-button';
 const buttonExpandClass = 'pp-expand';
 const buttonContractClass = 'pp-contract';
@@ -5,13 +6,13 @@ const buttonExpandText = '+';
 const buttonContractText = '-';
 const messageClass = 'message';
 const hiddenClass = 'pp-hidden';
-const beautifyConfig = { indent_size: 2 };
 const language = 'ruby';
 const eventListId = 'event_list';
 const listItemSelector = '.event.colorized';
-const mutationConfig = { childList: true };
 const listItemNodeName = 'LI';
 const listItemHoverClass = 'pp-hover';
+const beautifyConfig = { indent_size: 2 };
+const mutationConfig = { childList: true };
 
 // ListItem
 class ListItem {
@@ -180,4 +181,7 @@ class View {
 
 }
 
+// Init
+// Note that we don't need DOMContentLoaded/.ready since the extension is running
+// at document_idle. See https://developer.chrome.com/extensions/content_scripts
 new View().init();
