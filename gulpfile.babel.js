@@ -16,7 +16,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('copy', ['clean-dist'], () => {
-  gulp.src(['src/manifest.json'])
+  gulp.src(['src/manifest.json', 'design/icon.png'])
     .pipe(gulp.dest('dist'));
 });
 
